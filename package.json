@@ -1,0 +1,33 @@
+{
+  "name": "restman",
+  "version": "0.1.0",
+  "description": "restman",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/restman/restman.git"
+  },
+  "keywords": [
+    "restman"
+  ],
+  "author": "restman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/restman/restman/issues"
+  },
+  "homepage": "https://github.com/restman/restman#readme",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "coffee-script": "^1.9.3",
+    "cookie-parser": "^1.3.5",
+    "express": "^4.13.1",
+    "glob": "^5.0.14",
+    "method-override": "^2.3.4",
+    "mongoose": "^4.1.0",
+    "morgan": "^1.6.1",
+    "underscore": "^1.8.3"
+  }
+}
