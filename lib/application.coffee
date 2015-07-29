@@ -6,10 +6,14 @@ logger          = require 'morgan'
 cookieParser    = require 'cookie-parser'
 bodyParser      = require 'body-parser'
 methodOverride  = require 'method-override'
-
-app = express()
+responseTime    = require 'response-time'
 
 module.exports = (workspace) ->
+
+  app = express()
+
+  app.set 'x-powered-by', false
+
   app.use logger 'dev'
   app.use bodyParser.json()
   app.use bodyParser.urlencoded(
@@ -17,6 +21,8 @@ module.exports = (workspace) ->
   )
   app.use cookieParser()
   app.use methodOverride()
+  app.use responseTime()
+
 
   controllers = glob.sync workspace.controllerPath + '/**/*.coffee'
   controllers.forEach (controllerPath) ->
@@ -30,8 +36,6 @@ module.exports = (workspace) ->
     next err
   app
 
-module.exports.listen = (config) ->
-  app.listen(config.port)
 
 
 

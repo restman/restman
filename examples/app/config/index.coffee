@@ -4,16 +4,41 @@ config =
   development:
     app:
       name: 'dev demo'
-    port: 3000
+      port: 3000
+
+    sequelize:
+      enable: false
+      db: ''
+      username: ''
+      password: ''
+      host: ''
+      port: ''
+      dialect: 'mysql'
+      pool:
+        max: 5
+        min: 0
+        idle: 10000
+
+    redis:
+      enable: false
+      host: ''
+      port: ''
+
+    mongoose:
+      enable: false
+      host: ''
+      port: ''
+      db: ''
+
 
   test:
     app:
       name: 'test demo'
-    port: 3000
+      port: 3000
 
   production:
     app:
       name: 'prod demo'
-    port: 3000
+      port: 3000
 
 module.exports = config[env]
