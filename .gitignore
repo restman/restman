@@ -12,7 +12,6 @@ Desktop.ini
 .directory
 *~
 
-
 # npm
 node_modules
 *.log
@@ -22,3 +21,5 @@ node_modules
 *.js
 *.js.map
 
+# vim
+.*.sw*
