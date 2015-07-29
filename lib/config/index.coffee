@@ -1,4 +1,4 @@
 'use strict'
 
-module.exports = (workspace) ->
-  require workspace.configPath
+module.exports = (opts) ->
+  require opts.configPath

@@ -1,4 +1,3 @@
 restman = require "../"
-restman.bootstrap(__dirname)
+restman.bootstrap(__dirname).start()
 
-restman.start()
