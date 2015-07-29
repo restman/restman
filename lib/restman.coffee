@@ -9,8 +9,8 @@ workspace = (workspacePath) ->
   configPath: "#{workspacePath}/app/config"
   controllerPath: "#{workspacePath}/app/controllers"
   modelPath: "#{workspacePath}/app/models"
-  logPath: "#{workspacePath}/app/logs"
-  testPath: "#{workspacePath}/app/test"
+  logPath: "#{workspacePath}/logs"
+  testPath: "#{workspacePath}/test"
 
 module.exports = restman
 
