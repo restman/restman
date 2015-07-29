@@ -23,3 +23,7 @@ node_modules
 
 # vim
 .*.sw*
+
+#idea
+.idea
+
