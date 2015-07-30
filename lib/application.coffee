@@ -47,6 +47,14 @@ module.exports = (opts) ->
     err = new Error 'not found'
     next err
 
-  app.use error.errorHandler
+  app.use (err, req, res, next) ->
+    status = err.status or err.statusCode or 500
+    res.statusCode = status
+    body =
+      code: err.type
+      message: err.message
+      resource: err.resource
+      field: err.field
+    res.json(body)
 
   app

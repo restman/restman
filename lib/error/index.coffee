@@ -1,5 +1,11 @@
 'use strict'
 
 
-module.exports.errorHandler = (err, req, res, next) ->
+
+module.exports = (code, message, resource, field) ->
+
+
+
+
+
 
