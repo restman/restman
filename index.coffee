@@ -1,3 +1,3 @@
 'use strict'
-
-module.exports = require './lib/restman'
+restman = require './lib/restman'
+module.exports = restman

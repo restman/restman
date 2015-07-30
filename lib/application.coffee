@@ -9,8 +9,7 @@ bodyParser          = require 'body-parser'
 methodOverride      = require 'method-override'
 responseTime        = require 'response-time'
 winston             = require 'winston'
-
-error               = require './error'
+errors              = require './error'
 
 # Expose `application()`
 module.exports = (opts) ->
@@ -51,18 +50,16 @@ module.exports = (opts) ->
 
   # catch 404 and forward to error handler
   app.use (req, res, next) ->
-    err = new Error 'not found'
-    next err
+    next errors.BadMethod("message", "resource", "field")
 
   app.use (err, req, res, next) ->
     status = err.status or err.statusCode or 500
-    res.statusCode = status
     body =
-      code: err.type
+      code: err.name
       message: err.message
       resource: err.resource
       field: err.field
-    res.json(body)
+    res.status(status).json(body)
 
   # Return app
   app

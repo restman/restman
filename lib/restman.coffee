@@ -9,6 +9,7 @@ mongoose        = require './mongoose'
 sequelize       = require './sequelize'
 redis           = require './redis'
 logger          = require './logger'
+errors          = require './error'
 
 restman = {}
 
@@ -32,6 +33,7 @@ module.exports.bootstrap = (rootPath) ->
   restman.config = config(restman.opts)
   restman.app = application(restman.opts)
   restman.logger = logger(restman.opts)
+  restman.errors = errors
   restman.mongoose = mongoose(restman.config)
   restman.sequelize = sequelize(restman.config)
   restman.redis = redis(restman.config)
