@@ -1,5 +1,6 @@
 'use strict'
 
+# Module dependencies
 application     = require './application'
 config          = require './config'
 helper          = require './helper'
@@ -11,8 +12,7 @@ logger          = require './logger'
 
 restman = {}
 
-restman.ENV =
-
+# construct `opts`
 opts = (rootPath) ->
   ENV: process.env.NODE_ENV || 'development'
   rootPath: rootPath
@@ -22,8 +22,11 @@ opts = (rootPath) ->
   logPath: "#{rootPath}/logs"
   testPath: "#{rootPath}/test"
 
+
+# Expose `restman`
 module.exports = restman
 
+# Expose `restman.bootstrap`
 module.exports.bootstrap = (rootPath) ->
   restman.opts = opts(rootPath)
   restman.config = config(restman.opts)
@@ -36,6 +39,6 @@ module.exports.bootstrap = (rootPath) ->
   restman.utils = utils
   restman
 
+# Expose `restman.start`
 module.exports.start = ->
   restman.app.listen restman.config.app.port
-

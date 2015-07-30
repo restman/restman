@@ -12,8 +12,10 @@
   },
   "keywords": [
     "restman",
+    "express",
     "rest",
-    "express"
+    "restful",
+    "api"
   ],
   "author": "restman",
   "license": "MIT",
