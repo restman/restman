@@ -1,7 +1,4 @@
-'use strict'
-
 winston = require 'winston'
-_       = require 'underscore'
 
 module.exports = (opts) ->
 

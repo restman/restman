@@ -8,8 +8,8 @@ config =
 
     sequelize:
       enable: false
-      db: ''
-      username: ''
+      database: ''
+      user: ''
       password: ''
       host: ''
       port: ''
@@ -28,7 +28,7 @@ config =
       enable: false
       host: ''
       port: ''
-      db: ''
+      database: ''
 
 
   test:

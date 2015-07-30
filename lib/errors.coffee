@@ -1,7 +1,5 @@
-'use strict'
-
 util = require 'util'
-_    = require 'underscore'
+_    = require 'lodash'
 
 errors = {}
 

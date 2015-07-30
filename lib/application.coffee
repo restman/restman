@@ -1,5 +1,3 @@
-'use strict'
-
 # Module dependencies
 express             = require 'express'
 glob                = require 'glob'
@@ -9,7 +7,7 @@ bodyParser          = require 'body-parser'
 methodOverride      = require 'method-override'
 responseTime        = require 'response-time'
 winston             = require 'winston'
-errors              = require './error'
+errors              = require './errors'
 
 # Expose `application()`
 module.exports = (opts) ->
@@ -23,6 +21,15 @@ module.exports = (opts) ->
   # Disable x-powered-by
   app.set 'x-powered-by', false
 
+  # Load middle-ware
+  app.use bodyParser.json()
+  app.use bodyParser.urlencoded(
+    extended: true
+  )
+  app.use cookieParser()
+  app.use methodOverride()
+  app.use responseTime()
+
   # Use morgan write access log
   if opts.ENV is 'development'
     app.use morgan 'dev'
@@ -33,14 +40,10 @@ module.exports = (opts) ->
       logger.info(message)
     app.use morgan('combined', stream: logger)
 
-  # Load middle-ware
-  app.use bodyParser.json()
-  app.use bodyParser.urlencoded(
-    extended: true
-  )
-  app.use cookieParser()
-  app.use methodOverride()
-  app.use responseTime()
+  # Load custom middlewares
+  middlewares = require(opts.middlewarePath)
+  middlewares.forEach (middleware) ->
+    app.use middleware
 
   # Load controllers
   controllers = glob.sync opts.controllerPath + '/**/*.coffee'
