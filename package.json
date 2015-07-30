@@ -4,7 +4,8 @@
   "description": "restman",
   "main": "index.js",
   "scripts": {
-    "test": ""
+    "test": "mocha",
+    "prepublish": "coffee -c `find {./lib,./index.coffee} -type f -name '*.coffee'`"
   },
   "repository": {
     "type": "git",

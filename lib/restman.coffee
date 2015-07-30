@@ -40,6 +40,7 @@ restman.bootstrap = (rootPath) ->
 # Expose `restman.start`
 restman.start = ->
   restman.app.listen restman.config.app.port
+  console.log 'restman listening at http://[::]:' + restman.config.app.port
 
 # Expose `restman`
 module.exports = restman
