@@ -1,0 +1,14 @@
+{
+  "name": "examples",
+  "version": "0.1.0",
+  "description": "restman examples",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
