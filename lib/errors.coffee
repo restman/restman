@@ -4,20 +4,19 @@ _    = require 'lodash'
 errors = {}
 
 errors.CODES =
-  BadDigest: 400,
-  BadMethod: 405,
-  InvalidArgument: 409,
+  BadRequest: 400,
   InvalidContent: 400,
-  InvalidCredentials: 401,
   InvalidHeader: 400,
-  InvalidVersion: 400,
-  MissingParameter: 409,
-  NotAuthorized: 403,
-  PreconditionFailed: 412,
-  RequestExpired: 400,
-  RequestThrottled: 429,
+  UnAuthorized: 401,
+  Forbidden: 403,
   ResourceNotFound: 404,
-  WrongAccept: 406
+  BadMethod: 405,
+  RequestTimeout: 408,
+  InvalidArgument: 409,
+  MissingParameter: 409,
+  LengthRequired: 411,
+  UnprocessableEntity: 422,
+  Internal: 500
 
 _.each(_.keys(errors.CODES), (name) ->
   module.exports[name] = (message, resource, field) ->
@@ -28,9 +27,3 @@ _.each(_.keys(errors.CODES), (name) ->
     error.statusCode = errors.CODES[name]
     error
 )
-
-
-
-
-
-

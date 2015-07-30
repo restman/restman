@@ -53,7 +53,7 @@ module.exports = (opts) ->
 
   # catch 404 and forward to error handler
   app.use (req, res, next) ->
-    next errors.BadMethod("message", "resource", "field")
+    next errors.ResourceNotFound('Resource Not Found', '', '')
 
   app.use (err, req, res, next) ->
     status = err.status or err.statusCode or 500
