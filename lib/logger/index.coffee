@@ -13,9 +13,9 @@ module.exports = (opts) ->
         prettyPrint: true
       logger.add(winston.transports.Console, options)
     else
-    options =
-      filename: opts.logPath + logName + '.log'
-    logger.add(winston.transports.File, options)
+      options =
+        filename: opts.logPath + logName + '.log'
+      logger.add(winston.transports.File, options)
 
   logger = new winston.Logger
   loggerInit(opts, logger)
@@ -31,7 +31,3 @@ module.exports = (opts) ->
     newlogger
 
   logger
-
-
-
-
