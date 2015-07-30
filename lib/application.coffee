@@ -1,5 +1,6 @@
 'use strict'
 
+# Module dependencies
 express             = require 'express'
 glob                = require 'glob'
 morgan              = require 'morgan'
@@ -11,14 +12,19 @@ winston             = require 'winston'
 
 error               = require './error'
 
+# Expose `application()`
 module.exports = (opts) ->
 
+  # Init express
   app = express()
 
+  # Set env
   app.locals.ENV = opts.ENV
 
+  # Disable x-powered-by
   app.set 'x-powered-by', false
 
+  # Use morgan write access log
   if opts.ENV is 'development'
     app.use morgan 'dev'
   else
@@ -28,6 +34,7 @@ module.exports = (opts) ->
       logger.info(message)
     app.use morgan('combined', stream: logger)
 
+  # Load middle-ware
   app.use bodyParser.json()
   app.use bodyParser.urlencoded(
     extended: true
@@ -36,7 +43,7 @@ module.exports = (opts) ->
   app.use methodOverride()
   app.use responseTime()
 
-
+  # Load controllers
   controllers = glob.sync opts.controllerPath + '/**/*.coffee'
   controllers.forEach (controllerPath) ->
     router = express.Router()
@@ -47,6 +54,8 @@ module.exports = (opts) ->
     err = new Error 'not found'
     next err
 
+  # ErrorHandler
   app.use error.errorHandler
 
+  # Return app
   app
