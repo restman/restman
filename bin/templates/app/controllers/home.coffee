@@ -1,4 +1,4 @@
-restman = require "../../../"
+restman = require 'restman'
 
 module.exports = (app, router) ->
 

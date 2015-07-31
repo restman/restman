@@ -1,0 +1,135 @@
+#! /usr/bin/env coffee
+
+params    = require 'commander'
+fs        = require 'fs'
+path      = require 'path'
+sys_exec  = require('child_process').exec
+pkg       = require '../package'
+
+params
+  .version(pkg.version)
+  .usage('[options] [dir]')
+  .option('    --js', 'create a javascript app (defaults to coffeescript)')
+  .parse(process.argv)
+
+# Main program
+main = ->
+  # Path
+  destPath = params.args.shift() or '.'
+
+  # App name
+  appName = path.basename(path.resolve(destPath))
+
+  # Generate application
+  emptyDirectory destPath, (empty) ->
+    mkdir destPath if empty
+    createApplication appName, destPath
+
+# Generate application
+createApplication = (appName, path) ->
+  # copy templates
+  copyTemplate path
+
+  # coffee to js
+  coffee2js path if params.js
+
+  # install npm package
+  installNpm path if params.npm
+
+  # done
+  done path
+
+###
+# Check if the given directory `path` is empty.
+#
+# @param {String} path
+# @param {Function} fn
+###
+emptyDirectory = (path, fn) ->
+  fs.readdir path, (err, files) ->
+    if err and 'ENOENT' != err.code
+      throw err
+    fn !files or !files.length
+
+###
+# Exec command
+#
+# @param {String} command
+###
+exec = (command) ->
+  return unless command
+  sys_exec command, (err, stdout, stderr) ->
+    throw err if err
+    console.log stdout if stdout
+    console.error stderr if stderr
+
+###
+# copy template
+#
+# @param {String} path
+###
+copyTemplate = (path) ->
+  cmd = [
+    "cp -r #{__dirname}/templates/* #{path}"
+    "mv #{path}/gitignore #{path}/.gitignore"
+  ]
+  exec cmd.join(' && ')
+  console.log '   \x1b[36mcopy template to\x1b[0m : ' + path
+
+###
+# coffee to js
+#
+# @param {String} path
+###
+coffee2js = (path) ->
+  cmd = [
+    "coffee -c `find #{path} -type f -name '*.coffee'`"
+    "rm `find #{path} -type f -name '*.coffee'`"
+  ]
+  exec cmd.join(' && ')
+  console.log '   \x1b[36mcompile to js ...\x1b[0m'
+
+###
+# npm install
+#
+# @param {String} path
+###
+installNpm = (path) ->
+  cmd = [
+    "cd #{path}"
+    "npm install"
+  ]
+  console.log '   \x1b[36mnpm install ...\x1b[0m'
+  exec cmd.join(' && ')
+
+###
+# mkdir -p
+#
+# @param {String} path
+###
+mkdir = (path) ->
+  exec "mkdir -p #{path}"
+  console.log '   \x1b[36mcreate dir\x1b[0m : ' + path
+
+###
+# done
+#
+# @param {String} path
+###
+done = (path) ->
+  # remove .gitkeep
+  exec "rm `find #{path} -type f -name '.gitkeep'`"
+
+  # prompt npm install
+  unless params.npm
+    console.log
+    console.log '   install dependencies:'
+    console.log "     $ cd #{path} && npm install"
+
+  # prompt run app
+  console.log
+  console.log '   run the app:'
+  console.log '     $ npm start'
+  console.log
+
+main()
