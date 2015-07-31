@@ -1,4 +1,5 @@
 restman = require "../../../"
+
 module.exports = (app, router) ->
 
   app.use '/', router
