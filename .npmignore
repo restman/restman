@@ -18,7 +18,8 @@ node_modules
 *.gz
 
 # coffee
-*.coffee
+lib/**/*.coffee
+index.coffee
 *.js.map
 
 # vim
