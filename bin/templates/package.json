@@ -1,0 +1,22 @@
+{
+  "name": "YOURAPPNAME",
+  "version": "0.1.0",
+  "description": "Your rest api description.",
+  "main": "index.coffee",
+  "scripts": {
+    "start": "coffee index.coffee",
+    "test": "export NODE_ENV=test && mocha"
+  },
+  "author": "",
+  "license": "private",
+  "dependencies": {
+    "restman": "*",
+    "lodash": "*"
+  },
+  "devDependencies": {
+    "coffee-script": "1.9.3",
+    "mocha": "2.2.5",
+    "should": "7.0.1",
+    "supertest": "1.0.1"
+  }
+}
