@@ -5,16 +5,18 @@
   "main": "index.coffee",
   "scripts": {
     "start": "coffee index.coffee",
-    "test": "export NODE_ENV=test && mocha"
+    "watch": "NODE_ENV=development nodemon index.coffee",
+    "test": "NODE_ENV=test mocha"
   },
   "author": "",
   "license": "private",
   "dependencies": {
-    "restman": "*",
-    "lodash": "*"
+    "restman": "latest",
+    "lodash": "3.10.0"
   },
   "devDependencies": {
     "coffee-script": "1.9.3",
+    "nodemon": "1.4.0",
     "mocha": "2.2.5",
     "should": "7.0.1",
     "supertest": "1.0.1"
