@@ -26,7 +26,6 @@ opts = (rootPath) ->
 restman.bootstrap = (rootPath) ->
   restman.opts      = opts(rootPath)
   restman.config    = config(restman.opts)
-  restman.app       = application(restman.opts)
   restman.logger    = logger(restman.opts)
   restman.errors    = errors
   restman.mongoose  = mongoose(restman.config)
@@ -34,6 +33,7 @@ restman.bootstrap = (rootPath) ->
   restman.redis     = redis(restman.config)
   restman.helper    = helper
   restman.utils     = utils
+  restman.app       = application(restman.opts)
   restman
 
 

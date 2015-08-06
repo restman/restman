@@ -6,4 +6,4 @@ module.exports = (config) ->
   options =
     dialect: opts.dialect
     pool: opts.pool
-  new Sequelize(opts.dbname, opts.user, opts.password, options)
+  new Sequelize(opts.database, opts.user, opts.password, options)
