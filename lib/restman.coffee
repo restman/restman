@@ -44,4 +44,3 @@ restman.start = ->
 
 # Expose `restman`
 module.exports = restman
-
