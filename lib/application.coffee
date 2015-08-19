@@ -45,6 +45,12 @@ module.exports = (opts) ->
   middlewares.forEach (middleware) ->
     app.use middleware
 
+  # Init req.data and charset
+  app.use (req, res, next) ->
+    req.data = {}
+    res.charset = 'utf-8'
+    next()
+
   # Load controllers
   controllers = glob.sync opts.controllerPath + '/**/*.coffee'
   controllers.forEach (controllerPath) ->
