@@ -1,6 +1,7 @@
-redis = require 'redis'
+Redis = require 'ioredis'
 
 module.exports = (config) ->
   opts = config.redis
   return unless opts.enable
-  redis.createClient(opts.port, opts.host)
+  redis = new Redis(opts.port, opts.host)
+  redis

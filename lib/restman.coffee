@@ -8,6 +8,7 @@ sequelize       = require './sequelize'
 redis           = require './redis'
 logger          = require './logger'
 errors          = require './errors'
+cache           = require './cache'
 
 restman = {}
 
@@ -31,6 +32,7 @@ restman.bootstrap = (rootPath) ->
   restman.mongoose  = mongoose(restman.config)
   restman.sequelize = sequelize(restman.config)
   restman.redis     = redis(restman.config)
+  restman.cache     = cache(restman.redis, restman.opts)
   restman.helper    = helper
   restman.utils     = utils
   restman.app       = application(restman.opts)
@@ -39,7 +41,7 @@ restman.bootstrap = (rootPath) ->
 
 # Expose `restman.start`
 restman.start = ->
-  restman.app.listen restman.config.app.port
+  restman.app.listen restman.config.app.port, '0.0.0.0'
   console.log 'restman listening at http://[::]:' + restman.config.app.port
 
 # Expose `restman`

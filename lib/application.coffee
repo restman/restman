@@ -62,6 +62,9 @@ module.exports = (opts) ->
       message: err.message
       resource: err.resource
       field: err.field
+
+    body['error'] = err.stack if opts.ENV is 'development'
+
     res.status(status).json(body)
 
   # Return app
