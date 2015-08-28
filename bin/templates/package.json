@@ -2,14 +2,16 @@
   "name": "YOURAPPNAME",
   "version": "0.1.0",
   "description": "Your rest api description.",
+  "privite": true,
+  "author": "",
   "main": "index.coffee",
   "scripts": {
     "start": "coffee index.coffee",
-    "watch": "NODE_ENV=development nodemon index.coffee",
-    "test": "NODE_ENV=test mocha"
+    "watch": "NODE_ENV=development nodemon --watch app --watch lib index.coffee",
+    "test": "npm run test-spec && npm run test-api",
+    "test-api": "NODE_ENV=test mocha test/api/*.coffee",
+    "test-spec": "NODE_ENV=test mocha test/spec/*.coffee"
   },
-  "author": "",
-  "license": "private",
   "dependencies": {
     "restman": "latest",
     "lodash": "3.10.0"
