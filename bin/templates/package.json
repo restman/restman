@@ -2,8 +2,9 @@
   "name": "YOURAPPNAME",
   "version": "0.1.0",
   "description": "Your rest api description.",
-  "privite": true,
   "author": "",
+  "license": "MIT",
+  "privite": true,
   "main": "index.coffee",
   "scripts": {
     "start": "coffee index.coffee",
