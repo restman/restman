@@ -1,14 +1,12 @@
 # Module dependencies
-application     = require './application'
-config          = require './config'
-helper          = require './helper'
-utils           = require './utils'
-mongoose        = require './mongoose'
-sequelize       = require './sequelize'
-redis           = require './redis'
-logger          = require './logger'
-errors          = require './errors'
-cache           = require './cache'
+_       = require 'lodash'
+app     = require 'restman-app'
+errors  = require 'restman-errors'
+queue   = require 'restman-queue'
+utils   = require 'restman-utils'
+config  = require 'restman-config'
+cache   = require 'restman-cache'
+logger  = require 'restman-logger'
 
 restman = {}
 
@@ -26,23 +24,24 @@ opts = (rootPath) ->
 # Expose `restman.bootstrap`
 restman.bootstrap = (rootPath) ->
   restman.opts      = opts(rootPath)
-  restman.config    = config(restman.opts)
-  restman.logger    = logger(restman.opts)
+  restman.config    = config(restman.opts.configPath)
+  restman.logger    = logger(restman.opts.logPath)
   restman.errors    = errors
-  restman.mongoose  = mongoose(restman.config)
-  restman.sequelize = sequelize(restman.config)
-  restman.redis     = redis(restman.config)
-  restman.cache     = cache(restman.redis, restman.opts)
-  restman.helper    = helper
   restman.utils     = utils
-  restman.app       = application(restman.opts)
+
+  if restman.config.has 'queue'
+    restman.queue   = queue(restman.config.get('queue.opts'))
+
+  if restman.config.has 'cache'
+    restman.cache   = cache(restman.config.get('cache.opts'), restman.config.get('cache.namespaceMap'))
+
   restman
 
-
-# Expose `restman.start`
+# Expose `restman.app.start`
 restman.start = ->
-  restman.app.listen restman.config.app.port, '0.0.0.0'
-  console.log 'restman listening at http://[::]:' + restman.config.app.port
+  restman.app = app(restman.opts)
+  restman.app.listen restman.config.get('app.port'), '0.0.0.0'
+  console.log "restman-app listening at http://0.0.0.0:#{restman.config.get('app.port')}"
 
 # Expose `restman`
 module.exports = restman
