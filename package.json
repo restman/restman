@@ -1,6 +1,6 @@
 {
   "name": "restman",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "restman",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,6 @@
   "homepage": "https://github.com/restman/restman#readme",
   "dependencies": {
     "lodash": "3.10.0",
-    "glob": "5.0.14",
     "restman-config": "*",
     "restman-logger": "*",
     "restman-queue": "*",
