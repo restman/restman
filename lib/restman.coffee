@@ -2,10 +2,8 @@
 _       = require 'lodash'
 app     = require 'restman-app'
 errors  = require 'restman-errors'
-queue   = require 'restman-queue'
 utils   = require 'restman-utils'
 config  = require 'restman-config'
-cache   = require 'restman-cache'
 logger  = require 'restman-logger'
 
 restman = {}
@@ -27,12 +25,6 @@ restman.bootstrap = (rootPath) ->
   restman.logger    = logger(restman.opts.logPath)
   restman.errors    = errors
   restman.utils     = utils
-
-  if restman.config.has 'queue'
-    restman.queue   = queue(restman.config.get('queue.opts'))
-
-  if restman.config.has 'cache'
-    restman.cache   = cache(restman.config.get('cache.opts'), restman.config.get('cache.namespaceMap'))
 
   restman
 

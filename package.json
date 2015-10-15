@@ -1,6 +1,6 @@
 {
   "name": "restman",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "restman",
   "main": "index.js",
   "scripts": {
@@ -28,10 +28,8 @@
     "lodash": "3.10.0",
     "restman-config": "*",
     "restman-logger": "*",
-    "restman-queue": "*",
     "restman-errors": "*",
     "restman-app": "*",
-    "restman-cache": "*",
     "restman-utils": "*"
   },
   "devDependencies": {
